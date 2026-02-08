@@ -1,0 +1,435 @@
+:root {
+    --pink-light: #fff0f5;
+    --pink-soft: #ffc0cb;
+    --pink-hot: #ff69b4;
+    --pink-deep: #ff1493;
+    --red-heart: #ff0000;
+    --text-dark: #3d2c2c;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    overflow-y: auto;
+    color: var(--text-dark);
+    padding: 2rem 0;
+    /* Add space at top/bottom for scrolling */
+}
+
+/* ========== ANIMATED GRADIENT BACKGROUND ========== */
+.background-mesh {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(45deg,
+            #ffeef2 0%,
+            #ffd6e0 25%,
+            #ffb6c8 50%,
+            #ffa6be 75%,
+            #ffeef2 100%);
+    background-size: 400% 400%;
+    animation: meshMove 12s ease infinite;
+    z-index: -2;
+}
+
+@keyframes meshMove {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+.noise-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* ========== MAIN CONTAINER ========== */
+.container {
+    text-align: center;
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 1rem;
+}
+
+/* ========== GLASSMORPHISM CARD ========== */
+.glass-card {
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 2.5rem 3rem;
+    /* Reduced from 3rem 3.5rem */
+    border-radius: 30px;
+    box-shadow:
+        0 20px 50px rgba(255, 105, 180, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.3) inset;
+    max-width: 95%;
+    width: 480px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-5px);
+    box-shadow:
+        0 25px 60px rgba(255, 105, 180, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.4) inset;
+}
+
+/* ========== TYPOGRAPHY ========== */
+.title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--pink-deep) 0%, var(--pink-hot) 50%, #ff8fab 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 10px rgba(255, 20, 147, 0.2);
+    letter-spacing: 0.02em;
+}
+
+.subtitle {
+    font-size: 1.15rem;
+    color: #7a5a5a;
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    /* Reduced from 2rem */
+    font-weight: 300;
+}
+
+/* ========== GIFT BOX ========== */
+#gift-box-container {
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+#gift-box-container:hover {
+    transform: scale(1.05);
+}
+
+.gift-box {
+    position: relative;
+    width: 110px;
+    height: 110px;
+    filter: drop-shadow(0 15px 25px rgba(255, 71, 87, 0.25));
+}
+
+.gift-box:hover {
+    animation: shake 0.4s ease infinite;
+}
+
+.box-body {
+    width: 100%;
+    height: 85px;
+    background: linear-gradient(145deg, #fff5f7 0%, #ffd1dc 60%, #ffb6c1 100%);
+    position: absolute;
+    bottom: 0;
+    border-radius: 0 0 8px 8px;
+    box-shadow: inset 0 -8px 15px rgba(0, 0, 0, 0.05);
+}
+
+.lid {
+    width: 120px;
+    height: 28px;
+    background: linear-gradient(145deg, #fff5f7 0%, #ffd1dc 60%, #ffb6c1 100%);
+    position: absolute;
+    top: 0;
+    left: -5px;
+    border-radius: 6px;
+    z-index: 2;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.ribbon-v {
+    width: 18px;
+    height: 100%;
+    background: linear-gradient(to right, #ff4757, #ff6b81, #ff4757);
+    margin: 0 auto;
+    box-shadow: 0 0 10px rgba(255, 71, 87, 0.3);
+}
+
+.ribbon-h-body {
+    width: 100%;
+    height: 18px;
+    background: linear-gradient(to bottom, #ff4757, #ff6b81, #ff4757);
+    position: absolute;
+    top: 38%;
+    box-shadow: 0 0 10px rgba(255, 71, 87, 0.3);
+}
+
+.ribbon-h {
+    width: 18px;
+    height: 100%;
+    background: linear-gradient(to right, #ff4757, #ff6b81, #ff4757);
+    margin: 0 auto;
+}
+
+.click-hint {
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    animation: pulse 2s ease infinite;
+}
+
+.gift-box.open .lid {
+    transform: translateY(-120px) rotate(-25deg) translateX(180px);
+    opacity: 0;
+}
+
+.gift-box.open~.click-hint {
+    display: none;
+}
+
+/* ========== MESSAGE ========== */
+.hidden {
+    display: none;
+}
+
+.message-text {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    /* Reduced line height from 2 */
+    color: var(--text-dark);
+    animation: fadeInUp 1.2s ease forwards;
+    padding: 0 0.5rem;
+}
+
+/* ========== POLAROID GALLERY ========== */
+#gallery-container {
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+    padding: 1rem;
+}
+
+.polaroid {
+    background: white;
+    padding: 12px 12px 40px 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    transform: rotate(var(--rot));
+    opacity: 0;
+    animation: dropIn 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    animation-delay: var(--delay);
+    transition: all 0.35s ease;
+}
+
+.polaroid:hover {
+    transform: scale(1.12) rotate(0deg) !important;
+    z-index: 10;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.photo-placeholder {
+    width: 130px;
+    height: 130px;
+    background: linear-gradient(135deg, #fafafa, #f0f0f0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+}
+
+.caption {
+    text-align: center;
+    margin-top: 12px;
+    font-family: 'Playfair Display', serif;
+    color: #666;
+    font-size: 0.95rem;
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    20% {
+        transform: rotate(4deg);
+    }
+
+    40% {
+        transform: rotate(-4deg);
+    }
+
+    60% {
+        transform: rotate(2deg);
+    }
+
+    80% {
+        transform: rotate(-2deg);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.02);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes dropIn {
+    from {
+        opacity: 0;
+        transform: translateY(-60px) rotate(var(--rot));
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) rotate(var(--rot));
+    }
+}
+
+/* ========== BACKGROUND HEARTS (BIGGER) ========== */
+.bg-heart {
+    position: fixed;
+    z-index: 1;
+    pointer-events: none;
+    animation: floatUp linear forwards;
+    will-change: transform;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(100vh) scale(0.5) rotate(0deg);
+        opacity: 0;
+    }
+
+    5% {
+        opacity: 0.8;
+    }
+
+    95% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-10vh) scale(1.1) rotate(15deg);
+        opacity: 0;
+    }
+}
+
+/* ========== FLOOD HEARTS (NATURAL MOTION) ========== */
+.flood-heart {
+    position: fixed;
+    color: var(--red-heart);
+    z-index: 10000;
+    pointer-events: none;
+    animation: floodNatural ease-out forwards;
+    filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.4));
+}
+
+@keyframes floodNatural {
+    0% {
+        transform: translateY(110vh) translateX(0) scale(0.4) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    50% {
+        transform: translateY(40vh) translateX(var(--drift, 0)) scale(1) rotate(calc(var(--rotation, 0deg) / 2));
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-15vh) translateX(calc(var(--drift, 0) * 1.5)) scale(1.2) rotate(var(--rotation, 0deg));
+        opacity: 0;
+    }
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 600px) {
+    .glass-card {
+        padding: 2rem 1.5rem;
+        border-radius: 20px;
+    }
+
+    .gift-box {
+        width: 90px;
+        height: 90px;
+    }
+
+    .box-body {
+        height: 70px;
+    }
+
+    .lid {
+        width: 100px;
+        height: 24px;
+    }
+
+    #gallery-container {
+        gap: 0.8rem;
+    }
+
+    .polaroid {
+        transform: scale(0.85) rotate(var(--rot));
+        padding: 8px 8px 30px 8px;
+    }
+
+    .photo-placeholder {
+        width: 100px;
+        height: 100px;
+        font-size: 2rem;
+    }
+}
